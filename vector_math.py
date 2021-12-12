@@ -7,15 +7,46 @@ Created on Sun Dec 12 13:59:06 2021
 
 import numpy as np
 
+# Get size dimensions of vectors from user input
+def get_size():
+    '''
+    
 
-#vec1 = np.array([1,1,1])
+    Returns
+    -------
+    int
+        size of vector or -1 if entered incorrectly
 
-#vec2 = np.array([1,1,1])
-
+    '''
+    size = input("Enter the size (dimension) of your vector(s): ")
+    try:
+        # Test if size is an int > 0
+        size = int(size)
+        if size > 0:
+            return size
+    except:
+        print("ERROR: please enter an integer value greater than 0")
+        return -1
+        
 
 # Get vector(s) from user input
 def get_vectors(num_v, size_v):
+    '''
     
+
+    Parameters
+    ----------
+    num_v : int
+        number of vectors (1 or 2)
+    size_v : int
+        dimension of vector
+
+    Returns
+    -------
+    vectors: list
+        vectors from user input
+
+    '''
     # Create list to hold return vectors
     vectors = []
     
@@ -30,22 +61,16 @@ def get_vectors(num_v, size_v):
             
             # Get the element 
             element = input("enter value number " + str(i + 1) + " for vector " + str(vec + 1) + ": ")
-            
-            # Check that input is numerical
-            if element.isdigit():
                 
-                # Add new element to vector
-                vector_list.append(float(element))
-            else:
-                print("please enter a numerical value")
-            
+            # Add new element to vector
+            vector_list.append(float(element))
+
         # Add finish vector to vectors 
         vectors.append(vector_list)
         
     return(vectors)
             
             
-    
 
 # Perform the operation chosen by user
 def do_math(text):
@@ -63,13 +88,10 @@ def do_math(text):
     # Ignore all capitalization
     text = text.lower()
     
-    vec_size = input("Enter the size(dimension) of your vector(s): ")
-    
-    try:
-        vec_size = int(vec_size)
-    except:
-        print("ERROR: please enter an integer value")
-    
+    # Get size dimensions of vectors
+    vec_size = -1
+    while vec_size == -1:
+        vec_size = get_size()
     
     if text == 'addition':
         # Get vectors from user input
@@ -132,17 +154,20 @@ def do_math(text):
         new_vec = vec1 + constant
     else:
         print("\nERROR: incorrect input \nEnter only letters \nChoose one of the options listed\n")
-    
+        return -1
     # Return the result of the vector operation
     return new_vec
+
     
+
+result = np.array([])
+
+while result.size == 0:
+    # Get operation from user input
+    print("Operations: \n\t Addition \n\t Subtraction \n\t Multiplication \n\t Scalar Multiplication \n\t Dot Product \n\t Constant Addition")
+    operation = input("Choose a vector operation from the list above: ")
+    result = do_math(operation)
     
-
-print("Operations: \n\t Addition \n\t Subtraction \n\t Multiplication \n\t Scalar Multiplication \n\t Dot Product \n\t Constant Addition")
-operation = input("Choose a vector operation from the list above: ")
-
-new_vec = do_math(operation)
-
-print("The result is: " + str(new_vec))
+print("The result is: " + str(result))
 
 
