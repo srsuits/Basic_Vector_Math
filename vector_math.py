@@ -12,25 +12,53 @@ vec1 = np.array([1,1,1])
 
 vec2 = np.array([1,1,1])
 
-#def get_vector(*names, size):
+
+
+def get_vectors(num_vectors, size_vectors):
     
     
-#    for name in names:
+    for vec in range(0, num_vectors):
         
-#        for x in range(0,size):
+        vector_list = []
+
+        for i in range(0,size_vectors):
             
-#            element = input("enter value number " + (x + 1) + "for " + name)
-#            print(element)
+            element = input("enter value number " + str(i + 1) + " for vector " + str(vec + 1) + ": ")
+            
+            if element.isdigit():
+                vector_list.append(float(element))
+            else:
+                print("please enter a numerical value")
+            
+
+            print(element)
+            
+            
     
 
 # Perform the operation chosen by user
 def do_math(text):
-    
+    '''
+    Parameters
+    ----------
+    text : string
+        user input to choose which vector operation to perform
+    Returns
+    -------
+    new_vec : np array or number
+        result of vector operation
+
+    '''
     # Ignore all capitalization
     text = text.lower()
     
     if text == 'addition':
+        
+        vectors = get_vectors(2, 3)
+        
         new_vec = vec1 + vec2
+        
+        
     elif text == 'subtraction':
         new_vec = vec1 - vec2
     elif text == 'multiplication':
